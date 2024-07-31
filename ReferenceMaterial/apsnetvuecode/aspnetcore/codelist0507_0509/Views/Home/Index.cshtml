@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script>
+    const eventSource = new EventSource("/streamData");
+
+    eventSource.onmessage = event => {
+        const message = event.data;
+        console.log("Received: " + message);
+    };
+
+    eventSource.onerror = error => {
+        console.log("Error: " + error);
+    };
+
+</script>

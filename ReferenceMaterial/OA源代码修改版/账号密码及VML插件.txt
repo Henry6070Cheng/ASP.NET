@@ -1,0 +1,4 @@
+admin   admin
+
+×¢²áVMLµÄIEÏÔÊ¾²å¼ş
+regsvr32 /s C:\Program Files\Common Files\Microsoft Shared\VGX\vgx.dll

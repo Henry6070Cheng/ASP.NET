@@ -1,0 +1,36 @@
+﻿using codelist0608.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+
+namespace codelist0608.Controllers
+{
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        //代码清单6-8
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SubmitForm()
+        {
+            // 处理表单提交
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}

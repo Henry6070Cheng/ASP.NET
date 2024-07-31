@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script>
+    var scheme = document.location.protocol === "https:" ? "wss" : "ws";
+    var port = document.location.port ? (":" + document.location.port) : "";
+    var connectionUrl = scheme + "://" + document.location.hostname + port + "/ws";
+    const socket = new WebSocket(connectionUrl);
+
+    socket.onopen = () => {
+        console.log("WebSocket connection established.");
+
+        // 发送消息到服务器
+        socket.send("Hello from client!");
+    };
+
+    socket.onmessage = event => {
+        console.log("Received: " + event.data);
+    };
+
+    socket.onclose = event => {
+        console.log("WebSocket connection closed with code: " + event.code);
+    };
+
+</script>

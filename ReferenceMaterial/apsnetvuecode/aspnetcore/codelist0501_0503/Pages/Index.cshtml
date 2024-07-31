@@ -1,0 +1,19 @@
+﻿@page
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chatHub")
+        .build();
+
+    connection.on("ReceiveMessage", (user, message) => {
+        console.log(`${user}: ${message}`);
+    });
+
+    connection.start()
+        .then(() => {
+            connection.invoke("SendMessage", "Alice", "Hello from client!");
+        })
+        .catch(err => console.error(err));
+</script>

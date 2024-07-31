@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!-- 假设我们的前端页面有一个按钮，点击该按钮会触发长轮询请求 -->
+<button onclick="startLongPolling()">开始长轮询</button>
+<button onclick="addData()">发送数据</button>
+
+<script>
+    async function startLongPolling() {
+        while (true) {
+            const response = await fetch('/LongPolling/WaitForData');
+            if (response.ok) {
+                const data = await response.text();
+                // 处理从服务器接收到的数据
+                console.log('Received data:', data);
+            } else if (response.status === 204) {
+                // 服务器没有新数据，继续进行长轮询
+                continue;
+            } else {
+                // 处理其他错误
+                console.error('Error:', response.statusText);
+                break;
+            }
+        }
+    }
+
+    async function addData() {
+       await fetch('/LongPolling/AddData?newData=test');
+    }
+</script>
+
